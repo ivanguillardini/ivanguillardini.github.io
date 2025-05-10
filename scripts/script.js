@@ -64,7 +64,7 @@ sendBtn.addEventListener('click', function() {
     // Redirigir directamente (comenta MQTT temporalmente)
     window.location.href = 'decision.html';
     
-    /*
+    
     // Descomentar esto después de verificar que la redirección funciona
     const mqttSuccess = window.mqttHandler.sendMessage(selectionData);
     if (mqttSuccess) {
@@ -72,6 +72,6 @@ sendBtn.addEventListener('click', function() {
     } else {
         alert('Error al enviar. Intenta nuevamente.');
     }
-    */
+    
 });
 });
