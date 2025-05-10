@@ -1,60 +1,55 @@
-// Configuración MQTT para GitHub Pages
+// Configuración MQTT
 const MQTT_CONFIG = {
-    host: 'wss://test.mosquitto.org:8081/mqtt',
-    clientId: 'zapatillas-client-' + Math.random().toString(36).substr(2, 8),
-    topic: 'zapatillas/pedidos',
-    timeout: 3
+    host: 'test.mosquitto.org', // Broker público para pruebas
+    port: 8080, // Puerto para WebSocket
+    clientId: 'zapatillas-client-' + Math.random().toString(16).substr(2, 8),
+    topic: 'zapatillas/pedidos'
 };
 
 let mqttClient = null;
-let isConnected = false;
 
+// Conectar al broker MQTT
+// Modifica la función connectMqtt
 function connectMqtt() {
     mqttClient = new Paho.MQTT.Client(
         MQTT_CONFIG.host,
+        MQTT_CONFIG.port,
         MQTT_CONFIG.clientId
     );
 
-    mqttClient.onConnectionLost = (response) => {
-        console.log('Conexión MQTT perdida:', response.errorMessage);
-        isConnected = false;
-        updateMqttStatus();
-        setTimeout(connectMqtt, 5000);
+    mqttClient.onConnectionLost = onConnectionLost;
+    
+    // Añade esto para depuración
+    mqttClient.onMessageArrived = function(message) {
+        console.log("Mensaje recibido:", message.payloadString);
     };
-
-    mqttClient.onMessageArrived = (message) => {
-        console.log('Mensaje recibido:', message.payloadString);
-    };
-
-    const options = {
-        timeout: MQTT_CONFIG.timeout,
-        useSSL: true,
-        onSuccess: () => {
-            console.log('Conectado a broker MQTT');
-            isConnected = true;
-            updateMqttStatus();
+    
+    mqttClient.connect({
+        onSuccess: function() {
+            console.log('Conectado a MQTT broker');
             mqttClient.subscribe(MQTT_CONFIG.topic);
         },
-        onFailure: (error) => {
-            console.error('Error de conexión MQTT:', error.errorMessage);
-            isConnected = false;
-            updateMqttStatus();
-        }
-    };
-
-    mqttClient.connect(options);
+        onFailure: function(err) {
+            console.error('Error de conexión MQTT:', err.errorMessage);
+        },
+        useSSL: true,
+        reconnect: true
+    });
 }
 
-function updateMqttStatus() {
-    const statusElement = document.getElementById('mqtt-status');
-    if (statusElement) {
-        statusElement.textContent = isConnected ? 'Conectado a MQTT' : 'Error de conexión MQTT';
-        statusElement.style.color = isConnected ? '#4CAF50' : '#F44336';
-    }
+function onConnect() {
+    console.log('Conectado al broker MQTT');
 }
 
+function onConnectionLost(response) {
+    console.log('Conexión perdida: ' + response.errorMessage);
+    // Intentar reconectar después de 5 segundos
+    setTimeout(connectMqtt, 5000);
+}
+
+// Enviar mensaje MQTT
 function sendMqttMessage(data) {
-    if (!isConnected || !mqttClient) {
+    if (!mqttClient || !mqttClient.isConnected()) {
         console.error('MQTT no conectado');
         return false;
     }
@@ -62,24 +57,31 @@ function sendMqttMessage(data) {
     try {
         const message = new Paho.MQTT.Message(JSON.stringify(data));
         message.destinationName = MQTT_CONFIG.topic;
-        message.qos = 1; // Calidad de servicio nivel 1
         mqttClient.send(message);
-        console.log('Mensaje MQTT enviado:', data);
+        console.log('Mensaje enviado:', data);
         return true;
     } catch (error) {
-        console.error('Error enviando mensaje MQTT:', error);
+        console.error('Error enviando mensaje:', error);
         return false;
     }
 }
 
-// Iniciar conexión cuando se carga la página
-window.addEventListener('load', () => {
-    connectMqtt();
-    updateMqttStatus();
-});
+// Iniciar conexión al cargar la página
+connectMqtt();
 
-// Exportar funciones para uso global
+// Guardar en "base de datos" (localStorage)
+function saveToDatabase(data) {
+    const pedidos = JSON.parse(localStorage.getItem('pedidos') || []);
+    pedidos.push({
+        ...data,
+        fecha: new Date().toISOString()
+    });
+    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+    console.log('Pedido guardado:', data);
+}
+
+// Exportar funciones
 window.mqttHandler = {
     sendMessage: sendMqttMessage,
-    isConnected: () => isConnected
+    saveToDatabase
 };

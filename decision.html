@@ -4,35 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmar Pedido</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <div class="container decision-container">
         <h1>¿Qué deseas hacer?</h1>
-        
         <div class="selection-summary">
             <h2>Tu selección:</h2>
             <p><strong>Modelo:</strong> <span id="summary-model">Runner Pro</span></p>
             <p><strong>Talla:</strong> <span id="summary-size">40</span></p>
             <p><strong>Color:</strong> <span id="summary-color">Negro</span></p>
-            <p><strong>Precio:</strong> <span id="summary-price">$89.99</span></p>
         </div>
-        
         <div class="decision-options">
-            <button id="buy-btn" class="btn decision-btn">
-                <i class="fas fa-shopping-cart"></i> Comprar
-            </button>
-            <button id="return-btn" class="btn decision-btn">
-                <i class="fas fa-undo"></i> Devolución
-            </button>
+            <button id="buy-btn" class="btn decision-btn">Comprar</button>
+            <button id="return-btn" class="btn decision-btn">Devolución</button>
         </div>
-        
-        <div id="transaction-status" class="transaction-status"></div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js"></script>
-    <script src="./scripts/mqtt.js"></script>
-    <script src="./scripts/decision.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="scripts/decision.js"></script>
 </body>
 </html>

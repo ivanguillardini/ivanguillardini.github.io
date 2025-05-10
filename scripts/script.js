@@ -37,47 +37,41 @@ document.addEventListener('DOMContentLoaded', function() {
             selectedColorHex = this.dataset.hex;
             selectedColorName = colorNames[selectedColor];
             colorText.textContent = `Color seleccionado: ${selectedColorName}`;
+            
+            // Cambiar color de la imagen (efecto visual)
             productImg.style.filter = `drop-shadow(0 5px 10px ${selectedColorHex})`;
         });
     });
 
-    sendBtn.addEventListener('click', async function() {
-        const selectionData = {
-            modelo: 'Runner Pro',
-            talla: selectedSize,
-            color: selectedColor,
-            colorName: selectedColorName,
-            precio: 89.99,
-            timestamp: new Date().toISOString(),
-            source: 'github-pages'
-        };
+sendBtn.addEventListener('click', function() {
+    console.log("Botón clickeado"); // Verifica que el evento se dispara
+    
+    const selectionData = {
+        modelo: 'Runner Pro',
+        talla: selectedSize,
+        color: selectedColor,
+        colorName: selectedColorName,
+        precio: 89.99,
+        accion: 'seleccion'
+    };
 
-        // Mostrar estado de envío
-        sendBtn.disabled = true;
-        sendBtn.textContent = 'Enviando...';
-        
-        try {
-            // Intentar enviar por MQTT
-            let mqttSuccess = false;
-            if (window.mqttHandler.isConnected()) {
-                mqttSuccess = window.mqttHandler.sendMessage(selectionData);
-            }
-            
-            // Guardar en localStorage como fallback
-            localStorage.setItem('ultimaSeleccion', JSON.stringify(selectionData));
-            
-            // Redirigir después de 1 segundo (para dar feedback visual)
-            setTimeout(() => {
-                window.location.href = 'decision.html';
-            }, 1000);
-            
-        } catch (error) {
-            console.error('Error:', error);
-            sendBtn.textContent = 'Error al enviar';
-            setTimeout(() => {
-                sendBtn.textContent = 'Enviar Selección';
-                sendBtn.disabled = false;
-            }, 2000);
-        }
-    });
+    console.log("Datos a enviar:", selectionData);
+    
+    // Guardar en localStorage primero
+    localStorage.setItem('ultimaSeleccion', JSON.stringify(selectionData));
+    console.log("Datos guardados en localStorage");
+    
+    // Redirigir directamente (comenta MQTT temporalmente)
+    window.location.href = 'decision.html';
+    
+    /*
+    // Descomentar esto después de verificar que la redirección funciona
+    const mqttSuccess = window.mqttHandler.sendMessage(selectionData);
+    if (mqttSuccess) {
+        window.location.href = 'decision.html';
+    } else {
+        alert('Error al enviar. Intenta nuevamente.');
+    }
+    */
+});
 });
