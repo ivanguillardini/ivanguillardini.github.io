@@ -43,30 +43,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    sendBtn.addEventListener('click', function() {
-        const selectionData = {
-            modelo: 'Runner Pro',
-            talla: selectedSize,
-            color: selectedColor,
-            colorName: selectedColorName,
-            precio: 89.99,
-            accion: 'seleccion'
-        };
+sendBtn.addEventListener('click', function() {
+    console.log("Botón clickeado"); // Verifica que el evento se dispara
+    
+    const selectionData = {
+        modelo: 'Runner Pro',
+        talla: selectedSize,
+        color: selectedColor,
+        colorName: selectedColorName,
+        precio: 89.99,
+        accion: 'seleccion'
+    };
 
-        // Enviar por MQTT
-        const mqttSuccess = window.mqttHandler.sendMessage(selectionData);
-        
-        // Guardar en "base de datos" (localStorage)
-        window.mqttHandler.saveToDatabase(selectionData);
-
-        if (mqttSuccess) {
-            // Guardar selección para la siguiente pantalla
-            localStorage.setItem('ultimaSeleccion', JSON.stringify(selectionData));
-            
-            // Redirigir a pantalla de decisión
-            window.location.href = 'decision.html';
-        } else {
-            alert('Error al enviar. Intenta nuevamente.');
-        }
-    });
+    console.log("Datos a enviar:", selectionData);
+    
+    // Guardar en localStorage primero
+    localStorage.setItem('ultimaSeleccion', JSON.stringify(selectionData));
+    console.log("Datos guardados en localStorage");
+    
+    // Redirigir directamente (comenta MQTT temporalmente)
+    window.location.href = 'decision.html';
+    
+    /*
+    // Descomentar esto después de verificar que la redirección funciona
+    const mqttSuccess = window.mqttHandler.sendMessage(selectionData);
+    if (mqttSuccess) {
+        window.location.href = 'decision.html';
+    } else {
+        alert('Error al enviar. Intenta nuevamente.');
+    }
+    */
+});
 });
