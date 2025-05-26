@@ -1,0 +1,258 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f9f0;
+  margin: 0;
+  padding: 20px;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #27ae60;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#quiz-container {
+  margin-bottom: 30px;
+}
+
+.pregunta-box {
+  background: #f8fff8;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #d5f5e3;
+  margin-bottom: 20px;
+}
+
+#categoria-actual {
+  color: #16a085;
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+#texto-pregunta {
+  font-size: 1.1em;
+  margin: 15px 0;
+  font-weight: 500;
+}
+
+#opciones-container {
+  margin: 20px 0;
+}
+
+.opcion {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background: #e8f8f0;
+  border: 1px solid #d0f0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.opcion:hover {
+  background: #d0f0e0;
+}
+
+.opcion.seleccionada {
+  background: #27ae60;
+  color: white;
+  border-color: #219653;
+}
+
+.opcion small {
+  display: block;
+  font-size: 0.8em;
+  margin-top: 5px;
+  color: inherit;
+  opacity: 0.8;
+}
+
+button {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #219653;
+}
+
+button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+#feedback {
+  margin-top: 20px;
+}
+
+.feedback-correcto {
+  background: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #c3e6cb;
+}
+
+.feedback-incorrecto {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+}
+
+#feedback button {
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.progreso {
+  margin-top: 30px;
+}
+
+progress {
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #ecf0f1;
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #27ae60;
+  border-radius: 5px;
+}
+
+#contador-preguntas {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  color: #7f8c8d;
+  font-size: 0.9em;
+}
+
+/* Resultados */
+#resultados-finales {
+  background: #f8fff8;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #d5f5e3;
+}
+
+.resultado-global {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #e8f5e9;
+  border-radius: 8px;
+}
+
+.puntuacion-total {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #27ae60;
+  margin: 10px 0;
+}
+
+.nivel {
+  font-size: 1.3em;
+  color: #16a085;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.feedback-global {
+  font-style: italic;
+  color: #555;
+}
+
+.categorias-resultados {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.categoria {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.categoria-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.categoria-header h4 {
+  margin: 0;
+  color: #1b5e20;
+}
+
+.barra-progreso {
+  height: 25px;
+  background: #e0e0e0;
+  border-radius: 13px;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.progreso {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  border-radius: 13px;
+  transition: width 0.5s ease;
+}
+
+.barra-progreso .porcentaje {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+.feedback-categoria {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .categorias-resultados {
+    grid-template-columns: 1fr 1fr;
+  }
+}
