@@ -605,7 +605,7 @@ function generarFeedbackCategoria(porcentaje) {
   return "Necesitas reforzar esta área.";
 }
 
-
+//final
 // Inicializar quiz
 inicializarCategorias();
 cargarPregunta();
