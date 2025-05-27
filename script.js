@@ -312,7 +312,124 @@ opciones: [
 { texto: "Ignorar la calidad", correcta: false }
 ],
 explicacion: "Un armario cápsula de 37 prendas puede crear 10,000 combinaciones (Project 333)."
+},
+{
+categoria: "Consumismo textil",
+pregunta: "¿Cuántos litros de agua se necesitan para producir 1 camiseta de algodón?",
+opciones: [
+{ texto: "≈100 litros", correcta: false },
+{ texto: "≈500 litros", correcta: false },
+{ texto: "≈2,700 litros", correcta: true },
+{ texto: "≈10,000 litros", correcta: false }
+],
+explicacion: "Según la WWF, producir una camiseta de algodón consume 2,700 litros (equivalente a lo que bebe una persona en 2.5 años)."
+},
+
+{
+categoria: "Consumismo textil",
+pregunta: "¿Qué porcentaje de la ropa producida anualmente nunca se vende?",
+opciones: [
+{ texto: "5%", correcta: false },
+{ texto: "20%", correcta: true },
+{ texto: "40%", correcta: false },
+{ texto: "60%", correcta: false }
+],
+explicacion: "El 20% de las prendas nunca se venden (Ellen MacArthur Foundation). Muchas terminan incineradas o en vertederos."
+},
+
+{
+categoria: "Consumismo textil",
+pregunta: "¿Cuántas prendas nuevas compra de media una persona al año?",
+opciones: [
+{ texto: "12 (1/mes)", correcta: false },
+{ texto: "36 (3/mes)", correcta: false },
+{ texto: "68 (más de 1/semana)", correcta: true },
+{ texto: "120 (10/mes)", correcta: false }
+],
+explicacion: "En países desarrollados la media es 68 prendas anuales (Greenpeace), 400% más que hace 20 años."
+},
+
+{
+categoria: "Consumismo textil",
+pregunta: "¿Qué material textil es el más contaminante al producirse?",
+opciones: [
+{ texto: "Algodón convencional", correcta: false },
+{ texto: "Lana", correcta: false },
+{ texto: "Poliéster", correcta: true },
+{ texto: "Lino", correcta: false }
+],
+explicacion: "El poliéster emite 3 veces más CO2 que el algodón y libera microplásticos en cada lavado."
+},
+{
+categoria: "Consumismo textil",
+pregunta: "¿Qué porcentaje de la ropa donada se recicla realmente?",
+opciones: [
+{ texto: "10%", correcta: false },
+{ texto: "25%", correcta: false },
+{ texto: "50%", correcta: false },
+{ texto: "Menos del 1%", correcta: true }
+],
+explicacion: "Solo el 0.1% de toda la ropa donada se recicla en nuevas prendas (Ellen MacArthur Foundation)."
+},
+
+{
+categoria: "Consumismo textil",
+pregunta: "¿Cuántas veces se usa de media una prenda antes de desecharla?",
+opciones: [
+{ texto: "5-10 veces", correcta: false },
+{ texto: "10-15 veces", correcta: false },
+{ texto: "7 veces", correcta: true },
+{ texto: "30 veces", correcta: false }
+],
+explicacion: "En 2015 era 7 veces (McKinsey), hoy probablemente menos debido al 'ultra-fast fashion'."
+},
+{
+categoria: "Consumismo textil",
+pregunta: "¿Qué porcentaje de trabajadores textiles gana un salario digno?",
+opciones: [
+{ texto: "2%", correcta: true },
+{ texto: "15%", correcta: false },
+{ texto: "30%", correcta: false },
+{ texto: "50%", correcta: false }
+],
+explicacion: "Solo el 2% de los 75 millones de trabajadores textiles gana un salario que cubre necesidades básicas (Clean Clothes Campaign)."
+},
+
+{
+categoria: "Consumismo textil",
+pregunta: "¿Cuántos microplásticos libera un lavado de ropa sintética?",
+opciones: [
+{ texto: "≈1,000 partículas", correcta: false },
+{ texto: "≈9,000 partículas", correcta: false },
+{ texto: "≈700,000 partículas", correcta: true },
+{ texto: "≈5 millones", correcta: false }
+],
+explicacion: "Cada lavado libera hasta 700,000 fibras (IUCN), que terminan en océanos y nuestra cadena alimentaria."
+},
+
+{
+categoria: "Consumismo textil",
+pregunta: "¿Qué alternativa es más sostenible para deshacerse de ropa?",
+opciones: [
+{ texto: "Donar a contenedores genéricos", correcta: false },
+{ texto: "Vender/trade-in en apps", correcta: true },
+{ texto: "Tirar a basura normal", correcta: false },
+{ texto: "Guardar indefinidamente", correcta: false }
+],
+explicacion: "Apps como Vinted o programas de trade-in (H&M, Patagonia) aseguran mayor reutilización real."
+},
+{
+categoria: "Consumismo textil",
+pregunta: "¿Cuánto CO2 emite la industria de la moda anualmente?",
+opciones: [
+{ texto: "≈100 millones de toneladas", correcta: false },
+{ texto: "≈500 millones de toneladas", correcta: false },
+{ texto: "≈1,700 millones de toneladas", correcta: true },
+{ texto: "≈3,000 millones de toneladas", correcta: false }
+],
+explicacion: "La moda emite más que vuelos internacionales y transporte marítimo juntos (UNEP, 2019)."
 }
+
 ];
 
 // Variables globales
@@ -474,11 +591,11 @@ function calcularNivel(porcentaje) {
 }
 
 function generarFeedbackGlobal(porcentaje) {
-  if (porcentaje >= 90) return "¡Excelente! Eres un modelo de conciencia ambiental.";
-  if (porcentaje >= 75) return "Buen trabajo, demuestras un gran conocimiento ecológico.";
-  if (porcentaje >= 60) return "Vas por buen camino, pero aún puedes mejorar.";
-  if (porcentaje >= 45) return "Tienes nociones básicas, sigue aprendiendo.";
-  return "Considera informarte más sobre sostenibilidad.";
+  if (porcentaje >= 90) return "Mas o menos tienes todos los conceptos claros, revisa los porcentajes de abajo y refuerza tus ambitos mas flojos";
+  if (porcentaje >= 75) return "Estas dentro de la mayoría de la población, te falta perfeccionar algunos ámbitos, espero que el cuestionario te haya ayudado a mejorar";
+  if (porcentaje >= 60) return "Vas en buen camino hacia la mejora de una vida mas sostenible. Intenta mejorar tus peores ambitos y te daras cuenta que tu trabajo ayuda";
+  if (porcentaje >= 45) return "Tus nociones son básicas, trata de repasar los contenidoso ofrecidos, mejorarando partes esenciales,!Sigue mejorando!";
+  return "Considera informarte más sobre todos los ambitos tratados en el cuestionario, tu presencia es muy importante para conseguir un mundo sostenible,!Esperamos que mejores!";
 }
 
 function generarFeedbackCategoria(porcentaje) {
@@ -487,6 +604,7 @@ function generarFeedbackCategoria(porcentaje) {
   if (porcentaje >= 40) return "Conocimiento básico, revisa los errores.";
   return "Necesitas reforzar esta área.";
 }
+
 
 // Inicializar quiz
 inicializarCategorias();

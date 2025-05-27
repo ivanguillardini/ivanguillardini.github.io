@@ -256,3 +256,67 @@ progress::-webkit-progress-value {
     grid-template-columns: 1fr 1fr;
   }
 }
+/* Estilos para consejos */
+.necesita-mejora {
+  border-left: 4px solid #e74c3c;
+  background-color: #fff8f8;
+}
+
+.consejos {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px dashed #ddd;
+}
+
+.consejos h5 {
+  color: #27ae60;
+  margin-bottom: 8px;
+}
+
+.consejos ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.consejos li {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.consejos-finales {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f0f9f0;
+  border-radius: 8px;
+}
+
+.consejos-finales h3 {
+  color: #16a085;
+  margin-top: 0;
+}
+
+.consejos-container {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.consejos-container ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.consejos-container li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.consejos-container li:before {
+  content: "•";
+  color: #27ae60;
+  font-size: 1.5em;
+  position: absolute;
+  left: 0;
+  top: -3px;
+}
